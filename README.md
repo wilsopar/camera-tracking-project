@@ -1,4 +1,4 @@
-<img align="left" src="docs/demo.gif" alt="Person tracker demo" width="280">
+<img align="right" src="docs/demo.gif" alt="Person tracker demo" width="320">
 
 # Python Person Tracking Software (Webcam-Based)
 
