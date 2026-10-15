@@ -1,12 +1,8 @@
-<img align="right" src="docs/demo.gif" alt="Person tracker demo" width="280">
-
-
-
+<img align="left" src="docs/demo.gif" alt="Person tracker demo" width="280">
 
 # Python Person Tracking Software (Webcam-Based)
 
 ## Contributions
-### YOLO
 Uses pretrained YOLO for person detections. I implemented target-coordinate processing, smoothening of detection, movement-direction logic, pause/resume controls, and the OpenCV interface.
 
 ## My Decisions and Explanations
