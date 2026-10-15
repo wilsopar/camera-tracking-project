@@ -65,12 +65,13 @@ def main():
                     else:
                         smoothed_x += alpha * (detected_x - smoothed_x)
                         smoothed_y += alpha * (detected_y - smoothed_y)
+
+                    target["x"] = int(smoothed_x)
+                    target["y"] = int(smoothed_y)
+                    
                 else:
                     smoothed_x = None
                     smoothed_y = None
-
-                target["x"] = int(smoothed_x)
-                target["y"] = int(smoothed_y)
 
                 frame = results[0].plot()
 
@@ -154,7 +155,7 @@ def main():
 
     finally:
         camera.release()
-        cv2.destroyAllWindows
+        cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     main()
