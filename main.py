@@ -78,7 +78,19 @@ def main():
                 height, width = frame.shape[:2]
                 center_x = width // 2
                 center_y = height // 2
-
+                
+                overlay = frame.copy()
+                
+                cv2.circle(
+                    overlay, 
+                    (center_x, center_y), 
+                    dead_zone, 
+                    (0, 0, 255), 
+                    -1
+                )
+                
+                cv2.addWeighted(overlay, 0.25, frame, 0.75, 0, frame)
+                
                 cv2.circle(
                     frame,
                     (center_x, center_y),
