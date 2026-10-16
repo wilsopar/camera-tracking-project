@@ -90,14 +90,6 @@ def main():
                 )
                 
                 cv2.addWeighted(overlay, 0.25, frame, 0.75, 0, frame)
-                
-                cv2.circle(
-                    frame,
-                    (center_x, center_y),
-                    5,
-                    (0, 255, 0),
-                    -1
-                )
 
                 horizontal = "STOP"
                 vertical = "STOP"
