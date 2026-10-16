@@ -7,21 +7,21 @@ from tracking import calculate_direction
 def main():
 
     try:
-        target = {"x": None, "y": None}
+        target = {"x": None, "y": None} 
 
-        camera_index = 0
+        camera_index = 0 
         model_path = "yolo26n.pt"
         confidence_threshold = 0.5
         image_size = 320
         dead_zone = 20
         alpha = 0.3
         camera = cv2.VideoCapture(camera_index)
-        
+
         if camera.isOpened():
             print("Camera opened successfully.")
 
             # Create the window before attaching its mouse callback.
-            cv2.namedWindow("Camera Frame")
+            cv2.namedWindow("Person Detection Software")
 
             detector = YOLO(model_path)
 
@@ -65,10 +65,8 @@ def main():
                     else:
                         smoothed_x += alpha * (detected_x - smoothed_x)
                         smoothed_y += alpha * (detected_y - smoothed_y)
-
                     target["x"] = int(smoothed_x)
                     target["y"] = int(smoothed_y)
-                    
                 else:
                     smoothed_x = None
                     smoothed_y = None
@@ -78,9 +76,10 @@ def main():
                 height, width = frame.shape[:2]
                 center_x = width // 2
                 center_y = height // 2
-                
+
                 overlay = frame.copy()
                 
+                # 2. Draw a filled red circle corresponding to the dead_zone radius on the overlay
                 cv2.circle(
                     overlay, 
                     (center_x, center_y), 
@@ -89,8 +88,9 @@ def main():
                     -1
                 )
                 
+                # 3. Blend the overlay back into the main frame (0.25 opacity for the red circle)
                 cv2.addWeighted(overlay, 0.25, frame, 0.75, 0, frame)
-
+            
                 horizontal = "STOP"
                 vertical = "STOP"
                 status = "NO PERSON"
@@ -122,6 +122,8 @@ def main():
                         2
                     )
 
+                print(f"X Error: {error_x} | Y Error: {error_y}")
+
                 cv2.putText(
                     frame,
                     f"{status} | Pan: {horizontal}, Tilt={vertical}",
@@ -145,11 +147,14 @@ def main():
                     2
                 )
 
-                cv2.imshow("Camera Frame", frame)
+                cv2.imshow("Person Detection Software", frame)
 
                 # Process window events and check for a keypress.
                 key = cv2.waitKey(1) & 0xFF
-                if key == ord("q"):
+                if cv2.getWindowProperty("Person Detection Software", cv2.WND_PROP_VISIBLE) < 1:
+                    break
+                
+                elif key == ord("q"):
                     break
                 elif key == ord (" "):
                     tracking_enabled = not tracking_enabled
