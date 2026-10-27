@@ -28,4 +28,4 @@ Uses pretrained YOLO for person detections. I implemented target-coordinate proc
 # Limitations / Performance (10/14/26)
 - Selects the first detected person, may switch between people, and currently displays commands without controlling motors.
 - Approximately 20–30 FPS on your laptop at imgsz=320, measured before display. Treat this as your observed result, not a guarantee.
-- YOLO performs detection; you built the application around it, including target processing and movement logic.
+- YOLO performs detection; I built the application around it, including target processing and movement logic.
